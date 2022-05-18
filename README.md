@@ -28,13 +28,13 @@ Permite eliminar el producto indicado por ID de los registros.
 
 *Sugerencia: registrar nuevos productos utilizando el siguiente formato JSON.*
 
-{
-    "name": "...",
-    "description": "...",
-    "code": "...",
-    "img-url": "...",
-    "price": "...",
-    "stock": "..."
+{  
+    "name": "...",  
+    "description": "...",  
+    "code": "...",  
+    "img-url": "...",  
+    "price": "...",  
+    "stock": "..."  
 }
 
 **- Carritos -**
@@ -52,8 +52,8 @@ Permite registrar un nuevo producto en el carrito indicado por ID. El ID del pro
 
 *Ejemplo:*  
 
-{
-    "productId": "..."
+{  
+    "productId": "..."  
 }
 
 DELETE `/api/carts/:cartId/products/:productId`  
