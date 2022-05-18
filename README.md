@@ -10,7 +10,7 @@ Para ejecutar la API de forma local, primero es necesario clonar el presente rep
 Se listarán debajo todos los endpoints disponibles en la aplicación junto con una breve descripción de cada uno.
 Los endpoints señalados con la marca *(admin)* serán accesibles solo para usuarios administradores. Para indicar que el usuario es adminstrador, basta con enviar en el encabezado de la solicitud la propiedad `admin` con valor `true`.
 
-**- Productos -**
+**- Productos -**  
 GET `/api/products`  
 Devuelve un array con los datos de todos los productos registrados, cada uno de ellos en forma de objeto.
 
@@ -37,15 +37,18 @@ Permite eliminar el producto indicado por ID de los registros.
     "stock": "..."  
 }
 
-**- Carritos -**
+**- Carritos -**  
 POST `/api/carts`  
 Permite registrar un nuevo carrito.  
+
+GET `/api/carts/:cartId`
+Devuelve un array con los datos del carrito indicado por ID en forma de objeto.
 
 DELETE `/api/carts/:cartId`  
 Permite eliminar el carrito indicado mediante ID.  
 
 GET `/api/carts/:cartId/products`  
-Devuelve un array con todos los productos agregados al carrito indicado por ID.
+Devuelve un array con todos los productos agregados al carrito indicado por ID en forma de objetos.
 
 POST `/api/carts/:cartId/products`  
 Permite registrar un nuevo producto en el carrito indicado por ID. El ID del producto que se desea añadir debe ser enviado en el cuerpo de la solicitud.
