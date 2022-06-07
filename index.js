@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 const productsRoutes = require("./src/routes/products");
 const cartRoutes = require("./src/routes/carts");
 
