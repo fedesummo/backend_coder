@@ -6,18 +6,18 @@ class MongodbContainer {
   async getAllDocuments() {
     try {
       const docs = await this.model.find();
-      return docs;
+      return { status: 200, data: docs };
     } catch (err) {
-      return err;
+      return { status: 400, data: err };
     }
   }
 
   async getDocumentById(id) {
     try {
       const doc = await this.model.findById(id);
-      return doc;
+      return { status: 200, data: doc };
     } catch (err) {
-      return err;
+      return { status: 400, data: err };
     }
   }
 
@@ -25,42 +25,29 @@ class MongodbContainer {
     try {
       const doc = new this.model(data);
       const res = await doc.save();
-      return res;
+      return { status: 201, data: res };
     } catch (err) {
-      return err;
+      return { status: 400, data: err };
+    }
+  }
+
+  async updateDocumentById(id, data) {
+    try {
+      const res = await this.model.findByIdAndUpdate(id, data);
+      return { status: 200, data: res };
+    } catch (err) {
+      return { status: 400, data: err };
     }
   }
 
   async removeDocumentById(id) {
     try {
-        const res = await this.model.findByIdAndRemove(id)
-        return res
+      const res = await this.model.findByIdAndRemove(id);
+      return { status: 200, data: res };
     } catch (err) {
-        return err
+      return { status: 400, data: err };
     }
-  }
-
-  async updateDocumentById(id, data) {
-      try {
-          const res = await this.model.findByIdAndUpdate(id, data)
-          return res
-      } catch (err) {
-        return err
-      }
   }
 }
 
 module.exports = MongodbContainer;
-
-// const products = new MongodbContainer(ProductsModel);
-// products.getAllDocuments().then(data => console.log(data))
-// products.getDocumentById("629f2a5bb30aa5aaa2345b02").then(data => console.log(data))
-// products
-//   .saveDocument({ title: "Sony Xperia X1",
-//   description: "empty field",
-//   category: "smartphones",
-//   stock: 100,
-//   price: 859.99 })
-//   .then((data) => console.log(data));
-// products.removeDocumentById("629f2a5bb30aa5aaa2345b02").then(data => console.log(data))
-// products.updateDocumentById("629f338e90ad066206b802ce", {stock: 50}).then(data => console.log(data))

@@ -1,6 +1,6 @@
 const privateRoute = (req, res, next) => {
   const { admin } = req.headers;
-  !admin && res.json({ error: 401, msg: "Sin autorización" });
+  !admin && res.json({ status: 401, msg: "Unauthorized" });
   next();
 };
 
