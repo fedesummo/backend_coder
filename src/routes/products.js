@@ -1,6 +1,6 @@
 const express = require("express");
-const { products_db } = require("../db/db");
-const privateRoute = require("../middlewares/privateRoute");
+// const privateRoute = require("../middlewares/privateRoute");
+const ProductsDaos = require("./../daos/products");
 
 const { Router } = express;
 
@@ -8,8 +8,8 @@ const router = new Router();
 
 // Get all products.
 router.get("/", (req, res) => {
-  products_db
-    .getAll()
+  ProductsDaos
+    .getAllDocuments()
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
@@ -17,37 +17,36 @@ router.get("/", (req, res) => {
 // Get product by ID.
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  products_db
-    .getById(id)
+  ProductsDaos
+    .getDocumentById(id)
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
 
 // Post a new product.
-router.post("/", privateRoute, (req, res) => {
+router.post("/", (req, res) => {
   const product = req.body;
-  product.timestamp = Date.now()
-  products_db
-    .save(product)
+  ProductsDaos
+    .saveDocument(product)
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
 
 // Update product by ID.
-router.put("/:id", privateRoute, (req, res) => {
+router.put("/:id", (req, res) => {
   const { id } = req.params;
   const payload = req.body;
-  products_db
-    .updateById(id, payload)
+  ProductsDaos
+    .updateDocumentById(id, payload)
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
 
 // Delete product by ID.
-router.delete("/:id", privateRoute, (req, res) => {
+router.delete("/:id", (req, res) => {
   const { id } = req.params;
-  products_db
-    .removeById(id)
+  ProductsDaos
+    .removeDocumentById(id)
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 });
